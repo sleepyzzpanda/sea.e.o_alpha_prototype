@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6811014897510082288}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131,7 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1a2828ed1e4f74f8393ec87e74dabe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  moveDistance: 0.42
+  moveSpeed: 5
   move_point: {fileID: 8254387585439914032}
   stop_movement:
     serializedVersion: 2
@@ -148,7 +149,7 @@ MonoBehaviour:
   sprite_diving_left: {fileID: 484361590, guid: 61c632eb4ccde4d44bf7a2f7e0f833bc, type: 3}
   sprite_diving_right: {fileID: -1757647668, guid: 61c632eb4ccde4d44bf7a2f7e0f833bc, type: 3}
   is_diving: 0
-  sprite: {fileID: 0}
+  sprite_obj: {fileID: 6811014897510082288}
 --- !u!95 &7140780264938021484
 Animator:
   serializedVersion: 4
@@ -193,7 +194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8254387585439914033}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.24, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
