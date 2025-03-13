@@ -64,7 +64,7 @@ public class player_behavior : MonoBehaviour
             }
 
             transform.position = move_point.position; // Ensure final position is exact
-            yield return new WaitForSeconds(0.1f); // Pause before allowing another move
+            yield return new WaitForSeconds(0.05f); // Pause before allowing another move
         }
 
         isMoving = false;
