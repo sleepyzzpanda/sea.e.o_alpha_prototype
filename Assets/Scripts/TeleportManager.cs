@@ -19,10 +19,10 @@ public class TeleportManager : MonoBehaviour
         // flags are on TELEPORT layer
         if(Physics2D.OverlapCircle(player.transform.position, 0.15f, teleportLayer)){
             TeleportFlag flag = Physics2D.OverlapCircle(player.transform.position, 0.15f, teleportLayer).GetComponent<TeleportFlag>();
-            player.transform.position = flag.newPlayerPos; // set player pos
+            player.transform.position = flag.newPlayerPos.position; // set player pos
             // player move point too
-            player.GetComponent<player_behavior>().move_point.position = flag.newPlayerPos;
-            camera.transform.position = flag.cameraPos;
+            player.GetComponent<player_behavior>().move_point.position = flag.newPlayerPos.position;
+            camera.transform.position = flag.cameraPos.position;
             
         }
 

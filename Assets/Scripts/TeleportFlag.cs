@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TeleportFlag : MonoBehaviour
 {
-    public GameObject leadsTo;
-    public Vector3 cameraPos, newPlayerPos;
+    public Transform cameraPos, newPlayerPos;
    
 }
