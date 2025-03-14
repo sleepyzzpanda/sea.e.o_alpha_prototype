@@ -7,10 +7,11 @@ public class FlagManager : MonoBehaviour
     private int scene_index;
     private int emp_friendship;
     private int morality; // for keeping track of player's choices
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-        scene_index = 0; // inits to 0 
+        scene_index = 2; // inits to 0 
         emp_friendship = 0; // inits to 0  
         morality = 0; // inits to 0 
     }
@@ -56,6 +57,19 @@ public class FlagManager : MonoBehaviour
                 // 2. bedrooms -> push boxes, find usb (need screwdriver from electrical room on 1st floor)
                 // 3. infirmary -> find first aid kit
                 // 4. showers/washroom -> find containment suit
+                // string varName = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("test_var")).value;
+                bool observation_deck = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("observation_deck")).value);
+                bool bedrooms = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("bedrooms")).value);
+                bool infirmary = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("infirmary")).value);
+                bool showers = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("showers")).value);
+                bool dining_hall = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("dining_hall")).value);
+                bool area_done = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene5Done")).value); // check if all prev objectives done
+                if(observation_deck && bedrooms && infirmary && showers && dining_hall){
+                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene5Done")).value = "true";
+                }
+                if(area_done){
+                    scene_index = 6;
+                }
                 break;
             case 6: 
                 // cutscene:
