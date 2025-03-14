@@ -47,7 +47,29 @@
                 },
                 {
                     "name": "",
-                    "id": "db0a587d-41a2-458e-9a69-84a8bf1e88af",
+                    "id": "e2164f30-f9e2-4e97-8bc1-ea7c93fc31b0",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "775f685b-5d87-4c21-ba4d-da7c14ddf4c0",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "13c9ac2f-d40e-4f39-ae95-59912cb36e95",
                     "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
