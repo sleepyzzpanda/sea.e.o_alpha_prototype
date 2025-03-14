@@ -1,0 +1,2 @@
+We get the occasional deep-sea fish passing by. Massive creatures, odd-looking though. #speaker:Arlo #audio:arlo #portrait:arlo_default
+I’m here to study them and get promoted, don’t be in my way. #speaker:Endo #audio:endo #portrait:endo_superior
