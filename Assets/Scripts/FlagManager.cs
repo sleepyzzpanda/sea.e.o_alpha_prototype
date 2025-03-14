@@ -10,7 +10,7 @@ public class FlagManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scene_index = 6; // inits to 0 
+        scene_index = 2; // inits to 0 
         suit_trigger.SetActive(false);
     }
 
@@ -63,6 +63,7 @@ public class FlagManager : MonoBehaviour
 
                 string scene4Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene4Done")).value;
                 if(scene4Done == "true"){
+                    sceneflag5.SetActive(true);
                     scene_index = 5;
                 }
                 break;
@@ -96,6 +97,7 @@ public class FlagManager : MonoBehaviour
                 string area_done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene5Done")).value;
                 if(observation_deck == "true" && bedrooms == "true" && infirmary == "true" && showers == "true" && dining_hall == "true"){
                     ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("s5objsDone")).value = "true";
+                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene5Done")).value = "true";
                 }
                 if(area_done == "true"){
                     sceneflag6.SetActive(true);
