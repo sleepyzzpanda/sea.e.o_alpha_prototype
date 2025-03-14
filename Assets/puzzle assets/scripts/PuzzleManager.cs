@@ -19,6 +19,7 @@ public class PuzzleManager : MonoBehaviour
     public Moveable[] pieces;
 
     private int piecesCorrect;
+    public bool puzzleComplete;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,7 @@ public class PuzzleManager : MonoBehaviour
 
         piecesCorrect = 0;
         nextPuzzleButton.SetActive(false);
+        puzzleComplete = false;
     }
 
     // Update is called once per frame
@@ -72,6 +74,8 @@ public class PuzzleManager : MonoBehaviour
                     obj.disabled = true;
                 }
             }
+            // set puzzle complete to true
+            puzzleComplete = true;
         }
     }
 

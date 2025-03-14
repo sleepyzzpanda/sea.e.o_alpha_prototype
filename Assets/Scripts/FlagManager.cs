@@ -5,15 +5,13 @@ using UnityEngine;
 public class FlagManager : MonoBehaviour
 {
     private int scene_index;
-    private int emp_friendship;
-    private int morality; // for keeping track of player's choices
-    public GameObject player, sceneflag3, sceneflag4, sceneflag6, sceneflag7;
+    public GameObject suit_trigger;
+    public GameObject player, sceneflag3, sceneflag4, sceneflag5, sceneflag6, sceneflag7, sceneflag8;
     // Start is called before the first frame update
     void Start()
     {
         scene_index = 6; // inits to 0 
-        emp_friendship = 0; // inits to 0  
-        morality = 0; // inits to 0 
+        suit_trigger.SetActive(false);
     }
 
     // Update is called once per frame
@@ -124,6 +122,7 @@ public class FlagManager : MonoBehaviour
                 // need MC help to sort whats useful research, backup digital data to INTRA
                 string scene7Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene7Done")).value;
                 if(scene7Done == "true"){
+                    sceneflag8.SetActive(true);
                     scene_index = 8;
                 }
                 break;
@@ -149,13 +148,20 @@ public class FlagManager : MonoBehaviour
                 string screwdriver = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("screwdriver")).value;
                 string flashlight = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("flashlight")).value;
                 if(moonpool == "true" && admin == "true" && chem_mixer == "true" && chem_identifier == "true" && marine_room_wires == "true" && marine_animal == "true" && electrical_data == "true" && screwdriver == "true" && flashlight == "true"){
-                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("s8objsDone")).value = "true";
+                    scene_index = 9;
                 }
                 break;
             case 9:
+                //print for testing
+                Debug.Log("scene 9");
                 // cutscene
                 // once everything is explored, intra asks mc to deliver a sample outside 
                 // (deliver what was made from lab task)
+                string scene9Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene9Done")).value;
+                if(scene9Done == "true"){
+                    suit_trigger.SetActive(true);
+                    scene_index = 10;
+                }
                 break;
             case 10:
                 // MC goes to changeroom to put on containment suit
