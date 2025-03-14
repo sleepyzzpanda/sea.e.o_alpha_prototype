@@ -7,23 +7,61 @@ public class Item : MonoBehaviour
     [SerializeField] private string itemName;
     [SerializeField] private int quantity;
     [SerializeField] private Sprite itemSprite;
+    [Header("Visual Cue")]
+    [SerializeField] private GameObject visualCue;
 
+    [Header("Ink JSON")]
+    [SerializeField] private TextAsset inkJSON;
+
+    private bool playerInRange;
     private InventoryManager inventoryManager;
-    // Start is called before the first frame update
-    void Start()
+    public GameObject container;
+
+    private void Awake()
     {
+        playerInRange = false;
+        visualCue.SetActive(false);
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        // if player is near item, add item to inventory
-        if(Vector3.Distance(GameObject.Find("Player").transform.position, transform.position) <= 0.5f){
-            if(Input.GetKeyDown(KeyCode.Z)){
+        //cant make dialogue play unless in range and dialogue wasnt playing alr
+        if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
+        {
+            visualCue.SetActive(true);
+            
+            if(InputManager.GetInstance().GetInteractPressed())
+            {
+                DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
                 inventoryManager.AddItem(itemName, quantity, itemSprite);
-                Destroy(gameObject);
+                // set item to inactive
+                container.SetActive(false);
             }
+        }
+
+        else
+        {
+            visualCue.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        //check if nearby object is player to show visual cue
+        if(collider.gameObject.tag == "Player")
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        //get rid of visual cue
+        if(collider.gameObject.tag == "Player")
+        {
+            playerInRange = false;
         }
     }
 

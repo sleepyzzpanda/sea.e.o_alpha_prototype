@@ -5,4 +5,4 @@ The lack of employees means SEA.E.O wants secrecy of this place.
 Indeed! This station houses top-secret research but has served it’s purpose, and is currently being shut down. #speaker:Intra #audio:intra #portrait:intra_default
 Your proven loyalty to the company meant you were hired! Please review the research and upload to me what is useful.
 There are also samples that need to be delivered to the surface. You must choose what those are.
-~scene7Done = true
+~scene7Done = "true"

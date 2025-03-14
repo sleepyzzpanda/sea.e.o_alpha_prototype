@@ -6,4 +6,4 @@ Careful, it controls the entire station and reports back on our progress.  #spea
 
 Get on it’s bad side and you’ll be stuck outside with the fishes!
 ...that was a joke. My bad. #speaker:Arlo #audio:arlo #portrait:arlo_uneasy2
-~scene4Done = true
+~scene4Done = "true"

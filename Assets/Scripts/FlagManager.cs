@@ -7,11 +7,11 @@ public class FlagManager : MonoBehaviour
     private int scene_index;
     private int emp_friendship;
     private int morality; // for keeping track of player's choices
-    public GameObject player;
+    public GameObject player, sceneflag3, sceneflag4, sceneflag6, sceneflag7;
     // Start is called before the first frame update
     void Start()
     {
-        scene_index = 2; // inits to 0 
+        scene_index = 6; // inits to 0 
         emp_friendship = 0; // inits to 0  
         morality = 0; // inits to 0 
     }
@@ -31,6 +31,17 @@ public class FlagManager : MonoBehaviour
                 // some introductory dialogue
                 // will give them an item (datapad) to give to player which will be used as their menu screen.
                 // “to record your research and thoughts on”
+                // check if scene2 gameobject is inactive
+                // if inactive, set scene2Done to true
+                // if(GameObject.Find("scene2").activeSelf == false){
+                //     scene2Done = true;
+                // }
+                string scene2Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene2Done")).value;
+                if(scene2Done == "true"){
+                    // find scene3 gameobject and set it to active
+                    sceneflag3.SetActive(true);
+                    scene_index = 3;
+                }
                 break;
             case 3: 
                 // tutorial
@@ -38,12 +49,24 @@ public class FlagManager : MonoBehaviour
                 // talks abt menu options
                 // tutorial and welcome from company
                 // asks EMP to give mc a tour
+
+                string scene3Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene3Done")).value;
+                if(scene3Done == "true"){
+                    // find scene4 gameobject and set it to active
+                    sceneflag4.SetActive(true);
+                    scene_index = 4;
+                }
                 break;
             case 4:
                 // tour
                 //as theyre walking around, EMP or intra can explain whats going on (brief)
                 // “we’ll start with where you’ll be staying”
                 // players asks what EMP does
+
+                string scene4Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene4Done")).value;
+                if(scene4Done == "true"){
+                    scene_index = 5;
+                }
                 break;
             case 5:
                 // go to second floor first where living area is (show/explain how to go to second floor)
@@ -58,35 +81,76 @@ public class FlagManager : MonoBehaviour
                 // 3. infirmary -> find first aid kit
                 // 4. showers/washroom -> find containment suit
                 // string varName = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("test_var")).value;
-                bool observation_deck = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("observation_deck")).value);
-                bool bedrooms = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("bedrooms")).value);
-                bool infirmary = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("infirmary")).value);
-                bool showers = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("showers")).value);
-                bool dining_hall = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("dining_hall")).value);
-                bool area_done = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene5Done")).value); // check if all prev objectives done
-                if(observation_deck && bedrooms && infirmary && showers && dining_hall){
-                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene5Done")).value = "true";
+                // string observation_deck = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("observation_deck")).value);
+                // bool bedrooms = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("bedrooms")).value);
+                // bool infirmary = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("infirmary")).value);
+                // bool showers = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("showers")).value);
+                // bool dining_hall = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("dining_hall")).value);
+                // bool area_done = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene5Done")).value); // check if all prev objectives done
+                // if(observation_deck && bedrooms && infirmary && showers && dining_hall){
+                //     ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene5Done")).value = "true";
+                // }
+                string observation_deck = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("observation_deck")).value;
+                string bedrooms = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("bedroom")).value;
+                string infirmary = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("infirmary")).value;
+                string showers = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("showers")).value;
+                string dining_hall = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("dining_hall")).value;
+                string area_done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene5Done")).value;
+                if(observation_deck == "true" && bedrooms == "true" && infirmary == "true" && showers == "true" && dining_hall == "true"){
+                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("s5objsDone")).value = "true";
                 }
-                if(area_done){
+                if(area_done == "true"){
+                    sceneflag6.SetActive(true);
                     scene_index = 6;
                 }
                 break;
             case 6: 
+                // print for testing
                 // cutscene:
                 // go back to first floor
                 // INTRA takes over tour regarding science research
                 // player can thank or ignore EMP, who heads for repair room/electrical 
                 // (tells players to find him there if needed)
+                string scene6Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene6Done")).value;
+                if(scene6Done == "true"){
+                    sceneflag7.SetActive(true);
+                    scene_index = 7;
+                }
                 break;
             case 7:
                 // cutscene
                 // explore second floor w INTRA
                 // explains they’re in process of decommissioning station
                 // need MC help to sort whats useful research, backup digital data to INTRA
+                string scene7Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene7Done")).value;
+                if(scene7Done == "true"){
+                    scene_index = 8;
+                }
                 break;
             case 8:
                 // 1st floor stuff
                 // there is a lot going on here
+                // VAR moonpool = "false"
+                // VAR admin = "false"
+                // VAR chem_mixer = "false"
+                // VAR chem_identifier = "false"
+                // VAR marine_room_wires = "false"
+                // VAR marine_animal = "false"
+                // VAR electrical_data = "false"
+                // VAR screwdriver = "false"
+                // VAR flashlight = "false"
+                string moonpool = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("moonpool")).value;
+                string admin = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("admin")).value;
+                string chem_mixer = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("chem_mixer")).value;
+                string chem_identifier = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("chem_identifier")).value;
+                string marine_room_wires = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("marine_room_wires")).value;
+                string marine_animal = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("marine_animal")).value;
+                string electrical_data = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("electrical_data")).value;
+                string screwdriver = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("screwdriver")).value;
+                string flashlight = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("flashlight")).value;
+                if(moonpool == "true" && admin == "true" && chem_mixer == "true" && chem_identifier == "true" && marine_room_wires == "true" && marine_animal == "true" && electrical_data == "true" && screwdriver == "true" && flashlight == "true"){
+                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("s8objsDone")).value = "true";
+                }
                 break;
             case 9:
                 // cutscene
