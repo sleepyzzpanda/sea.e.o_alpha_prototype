@@ -5,12 +5,14 @@ using UnityEngine;
 public class FlagManager : MonoBehaviour
 {
     private int scene_index;
-    public GameObject suit_trigger;
-    public GameObject player, sceneflag3, sceneflag4, sceneflag5, sceneflag6, sceneflag7, sceneflag8;
+    public GameObject suit_trigger, teleportIN_trigger, ocean_monster;
+    public GameObject player, sceneflag3, sceneflag4, sceneflag5, 
+    sceneflag6, sceneflag7, sceneflag8, sceneflag9, sceneflag11,
+    sceneflag12;
     // Start is called before the first frame update
     void Start()
     {
-        scene_index = 2; // inits to 0 
+        scene_index = 9; // inits to 0 
         suit_trigger.SetActive(false);
     }
 
@@ -68,27 +70,11 @@ public class FlagManager : MonoBehaviour
                 }
                 break;
             case 5:
-                // go to second floor first where living area is (show/explain how to go to second floor)
-                // use elevator
-                // MC can walk around different areas and short cutscenes to introduce each rooms (1-3 lines)
-                // in each room, multiple interactables (but unnecessary if not highlighted/indicated)
-                // EMP follows around
-
                 // things to interact with
                 // 1. dining area -> observation log / data packet
                 // 2. bedrooms -> push boxes, find usb (need screwdriver from electrical room on 1st floor)
                 // 3. infirmary -> find first aid kit
                 // 4. showers/washroom -> find containment suit
-                // string varName = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("test_var")).value;
-                // string observation_deck = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("observation_deck")).value);
-                // bool bedrooms = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("bedrooms")).value);
-                // bool infirmary = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("infirmary")).value);
-                // bool showers = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("showers")).value);
-                // bool dining_hall = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("dining_hall")).value);
-                // bool area_done = bool.Parse(((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene5Done")).value); // check if all prev objectives done
-                // if(observation_deck && bedrooms && infirmary && showers && dining_hall){
-                //     ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene5Done")).value = "true";
-                // }
                 string observation_deck = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("observation_deck")).value;
                 string bedrooms = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("bedroom")).value;
                 string infirmary = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("infirmary")).value;
@@ -131,15 +117,6 @@ public class FlagManager : MonoBehaviour
             case 8:
                 // 1st floor stuff
                 // there is a lot going on here
-                // VAR moonpool = "false"
-                // VAR admin = "false"
-                // VAR chem_mixer = "false"
-                // VAR chem_identifier = "false"
-                // VAR marine_room_wires = "false"
-                // VAR marine_animal = "false"
-                // VAR electrical_data = "false"
-                // VAR screwdriver = "false"
-                // VAR flashlight = "false"
                 string moonpool = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("moonpool")).value;
                 string admin = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("admin")).value;
                 string chem_mixer = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("chem_mixer")).value;
@@ -151,6 +128,7 @@ public class FlagManager : MonoBehaviour
                 string flashlight = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("flashlight")).value;
                 if(moonpool == "true" && admin == "true" && chem_mixer == "true" && chem_identifier == "true" && marine_room_wires == "true" && marine_animal == "true" && electrical_data == "true" && screwdriver == "true" && flashlight == "true"){
                     scene_index = 9;
+                    sceneflag9.SetActive(true);
                 }
                 break;
             case 9:
@@ -162,6 +140,7 @@ public class FlagManager : MonoBehaviour
                 string scene9Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene9Done")).value;
                 if(scene9Done == "true"){
                     suit_trigger.SetActive(true);
+                    teleportIN_trigger.SetActive(true);
                     scene_index = 10;
                 }
                 break;
@@ -169,18 +148,41 @@ public class FlagManager : MonoBehaviour
                 // MC goes to changeroom to put on containment suit
                 // then moon pool 
                 // heads outside
+                Debug.Log("scene 10");
+                string containment_suit = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("containment_suit")).value;
+                if(containment_suit == "true"){
+                    sceneflag11.SetActive(true);
+                    scene_index = 11;
+                }
                 break;
             case 11:
                 // puzzle
                 // fix and send one drone off
                 // needs to do puzzle to confirm drone movement, drone leaves
-                // find missing piece, retrieve other drone to station
+
+                Debug.Log("scene 11");
+                string s11_puzzle = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("s11_puzzle")).value;
+                if(s11_puzzle == "true"){
+                    sceneflag12.SetActive(true);
+                    scene_index = 12;
+                }
                 break;
             case 12:
                 // cutscene
                 // monster chases to entrance of pool, door closes off before monster can get in
+                Debug.Log("scene 12");
+                string monster_chase = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("monster_chase")).value;
+                if(monster_chase == "true"){
+                    ocean_monster.SetActive(true);
+                }
+                string scene12Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene12Done")).value;
+                if(scene12Done == "true"){
+                    scene_index = 13;
+                    ocean_monster.SetActive(false);
+                }
                 break;
             case 13:
+                Debug.Log("scene 13");
                 // inside now
                 // ai plays a fool, pretends not to know whats happening
                 // tells mc to eliminate if sees again (could be source of virus)
@@ -261,6 +263,11 @@ public class FlagManager : MonoBehaviour
                 // ending - based on choices
                 break;
             
+        }
+        string gamover = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("gameover")).value;
+        if(gamover == "true"){
+            Debug.Log("game over");
+            scene_index = -1;
         }
     }
 }

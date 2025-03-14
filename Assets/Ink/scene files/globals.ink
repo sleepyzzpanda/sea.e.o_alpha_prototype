@@ -1,4 +1,5 @@
 VAR current_floor = 1
+VAR gameover = "false"
 // scene 5
 VAR dining_hall = "false"
 VAR observation_deck = "false"
@@ -21,6 +22,12 @@ VAR s8objsDone = "false"
 //scene10
 VAR containment_suit = "false"
 
+// scene 11
+VAR s11_puzzle = "false"
+
+// scene 12
+VAR monster_chase = "false"
+
 // scene flags
 VAR scene2Done = "false"
 VAR scene3Done = "false"
@@ -29,3 +36,4 @@ VAR scene5Done = "false"
 VAR scene6Done = "false"
 VAR scene7Done = "false"
 VAR scene9Done = "false"
+VAR scene12Done = "false"

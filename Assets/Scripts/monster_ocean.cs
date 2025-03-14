@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class monster_ocean : MonoBehaviour
 {
-    public float speed = 4.0f;
+    public float speed;
     public Transform move_point; // this will be the player's position
     public LayerMask stop_movement;
     // Start is called before the first frame update
     void Start()
     {
-        
+        speed = 2.5f;
     }
 
     // Update is called once per frame

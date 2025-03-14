@@ -7,8 +7,8 @@ public class puzzle_trigger : MonoBehaviour
     [Header("Visual Cue")]
     [SerializeField] private GameObject visualCue;
 
-    // [Header("Ink JSON")]
-    // [SerializeField] private TextAsset inkJSON;
+    [Header("Ink JSON")]
+    [SerializeField] private TextAsset inkJSON;
     public GameObject puzzle, puzzle_manager, wrongEventSystem, blocking_collider;
 
     private bool playerInRange, puzzle_done;
@@ -30,7 +30,6 @@ public class puzzle_trigger : MonoBehaviour
             
             if(InputManager.GetInstance().GetInteractPressed())
             {
-                // DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
                 puzzle.SetActive(true);
                 wrongEventSystem.SetActive(false);
             }
@@ -44,6 +43,10 @@ public class puzzle_trigger : MonoBehaviour
         puzzle_done = puzzle_manager.GetComponent<PuzzleManager>().puzzleComplete;
         if(puzzle_done)
         {
+            // if ink json not null, enter dialogue mode
+            if(inkJSON != null)
+                DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+                
             puzzle.SetActive(false);
             visualCue.SetActive(false);
             gameObject.SetActive(false);
