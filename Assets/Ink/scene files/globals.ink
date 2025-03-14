@@ -18,6 +18,9 @@ VAR screwdriver = "false"
 VAR flashlight = "false"
 VAR s8objsDone = "false"
 
+//scene10
+VAR containment_suit = "false"
+
 // scene flags
 VAR scene2Done = "false"
 VAR scene3Done = "false"
