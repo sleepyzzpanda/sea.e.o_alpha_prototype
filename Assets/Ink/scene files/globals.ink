@@ -29,6 +29,22 @@ VAR s11_puzzle = "false"
 // scene 12
 VAR monster_chase = "false"
 
+// scene 15
+VAR conferenceKey = "false"
+VAR conferenceScreen = "false"
+VAR lab1card = "false"
+VAR lab2log = "false"
+VAR lab3ingredientList = "false"
+VAR harpoon = "false"
+VAR weaponsKey = "false"
+
+// scene 16
+VAR mutant = "false"
+VAR disposalKey = "false"
+VAR brokenClaw = "false"
+VAR unknownSample = "false"
+VAR bloodyReport = "false"
+
 // scene flags
 VAR scene2Done = "false"
 VAR scene3Done = "false"

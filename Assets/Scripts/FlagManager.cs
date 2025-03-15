@@ -5,7 +5,7 @@ using UnityEngine;
 public class FlagManager : MonoBehaviour
 {
     private int scene_index;
-    public GameObject suit_trigger, teleportIN_trigger, ocean_monster, vent_trigger;
+    public GameObject suit_trigger, teleportIN_trigger, ocean_monster, vent_trigger, SF2_trigger;
     public GameObject player, sceneflag3, sceneflag4, sceneflag5, 
     sceneflag6, sceneflag7, sceneflag8, sceneflag9, sceneflag11,
     sceneflag12, sceneflag13, sceneflag14;
@@ -201,8 +201,40 @@ public class FlagManager : MonoBehaviour
                 }
                 break;
             case 15:
+                // secret floor lvl 1
                 Debug.Log("scene 15");
-                // exploring secret room
+                string conferenceKey = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("conferenceKey")).value;
+                string conferenceScreen = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("conferenceScreen")).value;
+                string lab1card = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("lab1card")).value;
+                string lab2log = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("lab2log")).value;
+                string lab3ingredientList = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("lab3ingredientList")).value;
+                string harpoon = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("harpoon")).value;
+                string weaponsKey = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("weaponsKey")).value;
+                if(conferenceKey == "true" && conferenceScreen == "true" && 
+                lab1card == "true" && lab2log == "true" && lab3ingredientList == "true" && 
+                harpoon == "true" && weaponsKey == "true")
+                {
+                    scene_index = 16;
+                    SF2_trigger.SetActive(true);
+                }
+                break;
+            case 16:
+                // secret floor lvl 2
+                Debug.Log("scene 16");
+                string mutant = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("mutant")).value;
+                string disposalKey = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("disposalKey")).value;
+                string brokenClaw = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("brokenClaw")).value;
+                string unknownSample = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("unknownSample")).value;
+                string bloodyReport = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("bloodyReport")).value;
+                if(mutant == "true" && disposalKey == "true" && 
+                brokenClaw == "true" && unknownSample == "true" && bloodyReport == "true")
+                {
+                    scene_index = 17;
+                }
+                break;
+            case 17:
+                Debug.Log("scene 17");
+                // scene 17
                 break;
             
         }
