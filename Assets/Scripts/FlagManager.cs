@@ -183,12 +183,7 @@ public class FlagManager : MonoBehaviour
                 break;
             case 13:
                 Debug.Log("scene 13");
-                // inside now
-                // ai plays a fool, pretends not to know whats happening
-                // tells mc to eliminate if sees again (could be source of virus)
-                // INTRA forbids player from going outside again unless permitted “for safety”
-                // mc doesn’t care and wants to go back to investigate scene
-                // need EMP to temporarily disable AI screens/cameras outside
+                // find and talk to Arlo
                 break;
             case 14:
                 // EMP disables and leaves, mc goes outside

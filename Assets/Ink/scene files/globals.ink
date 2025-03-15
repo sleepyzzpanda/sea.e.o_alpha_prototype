@@ -1,5 +1,6 @@
 VAR current_floor = 1
 VAR gameover = "false"
+VAR objective = "none"
 // scene 5
 VAR dining_hall = "false"
 VAR observation_deck = "false"
