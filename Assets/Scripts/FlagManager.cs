@@ -5,14 +5,14 @@ using UnityEngine;
 public class FlagManager : MonoBehaviour
 {
     private int scene_index;
-    public GameObject suit_trigger, teleportIN_trigger, ocean_monster;
+    public GameObject suit_trigger, teleportIN_trigger, ocean_monster, vent_trigger;
     public GameObject player, sceneflag3, sceneflag4, sceneflag5, 
     sceneflag6, sceneflag7, sceneflag8, sceneflag9, sceneflag11,
-    sceneflag12;
+    sceneflag12, sceneflag13, sceneflag14;
     // Start is called before the first frame update
     void Start()
     {
-        scene_index = 9; // inits to 0 
+        scene_index = 13; // inits to 0 
         suit_trigger.SetActive(false);
     }
 
@@ -178,84 +178,31 @@ public class FlagManager : MonoBehaviour
                 string scene12Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene12Done")).value;
                 if(scene12Done == "true"){
                     scene_index = 13;
+                    sceneflag13.SetActive(true);
                     ocean_monster.SetActive(false);
+                    teleportIN_trigger.SetActive(false);
                 }
                 break;
             case 13:
                 Debug.Log("scene 13");
                 // find and talk to Arlo
+                string scene13Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene13Done")).value;
+                if(scene13Done == "true"){
+                    vent_trigger.SetActive(true);
+                    sceneflag14.SetActive(true);
+                    scene_index = 14;
+                }
                 break;
             case 14:
-                // EMP disables and leaves, mc goes outside
-                // discover sealed off vent (“it’s sealed off”)
-                // MC wonders where it goes in station
+                Debug.Log("scene 14");
+                string scene14Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene14Done")).value;
+                if(scene14Done == "true"){
+                    scene_index = 15;
+                }
                 break;
             case 15:
-                // MC goes back and recruits EMP for help (EMP waiting in repair room or smth?)
-                // needs a map of the vents
-                // EMP is curious now too, but cautious
-                // EMP disables again (but for longer), go to vent on first floor, enter
-                // warns INTRA will be suspicious
-                break;
-            case 16:
-                // secret lab floor
-                // lots of stuff happens here
-            case 17:
-                // climax
-                // containment room
-                // cutscene
-                break;
-            case 18:
-                // puzzle
-                break;
-            case 19:
-                // cutscene
-                break;
-            case 20:
-                // smash the screen, go against INTRA -> scene 24
-                // go along with INTRA and company in destroying evidence, 
-                // turning blind eye, reach corporate success -> scene 21
-                break;
-            case 21:
-                // INTRA releases a monster, kills EMP
-                // player kills monster
-                // kill all the monsters in tubes
-                break;
-            case 22:
-                // head back up to first floor
-                // help INTRA set station to self destruct
-                // leave station via returned drone?
-                break;
-            case 23:
-                // cutscene
-                // renegade ending
-                // go to game over screen
-                break;
-            case 24:
-                // not gonna listen to intra, intra starts shutting doors, lights, trying to kill mc and emp, monsters from containment let out
-                // EMP unlocks doors
-                // MC needs to hold off monsters
-                // MC and emp escapes from more monsters
-                // head back up to 1st floor
-                break;
-            case 25:
-                // options to kill monsters or just run - can use claw once as a weapon
-                // Arlo gets thru security doors while players distract monsters
-                break;
-            case 26:
-                // finally reach first floor
-                // if EMP survived, can lock off area for mc so they can make a cure
-                // make cure
-                break;
-            case 27:
-                // go to AI room
-                // destroy INTRA
-                break;
-            case 28:
-                // spread cure
-                break;
-            case 29:
-                // ending - based on choices
+                Debug.Log("scene 15");
+                // exploring secret room
                 break;
             
         }
