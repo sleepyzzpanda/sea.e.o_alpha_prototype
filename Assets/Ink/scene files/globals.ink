@@ -1,6 +1,7 @@
 VAR current_floor = 1
 VAR gameover = "false"
 VAR objective = "none"
+VAR traitor = "false"
 // scene 5
 VAR dining_hall = "false"
 VAR observation_deck = "false"
@@ -44,6 +45,10 @@ VAR disposalKey = "false"
 VAR brokenClaw = "false"
 VAR unknownSample = "false"
 VAR bloodyReport = "false"
+
+// scene 18
+VAR monster_interacted = "false"
+VAR containment_computer = "false" 
 
 // scene flags
 VAR scene2Done = "false"

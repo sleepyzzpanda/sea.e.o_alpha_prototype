@@ -5,14 +5,15 @@ using UnityEngine;
 public class FlagManager : MonoBehaviour
 {
     private int scene_index;
-    public GameObject suit_trigger, teleportIN_trigger, ocean_monster, vent_trigger, SF2_trigger;
+    public GameObject suit_trigger, teleportIN_trigger, ocean_monster, 
+    vent_trigger, SF2_trigger, scene17Wall, scene18Wall;
     public GameObject player, sceneflag3, sceneflag4, sceneflag5, 
     sceneflag6, sceneflag7, sceneflag8, sceneflag9, sceneflag11,
-    sceneflag12, sceneflag13, sceneflag14;
+    sceneflag12, sceneflag13, sceneflag14, sceneflag18, sceneflag19;
     // Start is called before the first frame update
     void Start()
     {
-        scene_index = 13; // inits to 0 
+        scene_index = 2; // inits to 0 
         suit_trigger.SetActive(false);
     }
 
@@ -31,11 +32,6 @@ public class FlagManager : MonoBehaviour
                 // some introductory dialogue
                 // will give them an item (datapad) to give to player which will be used as their menu screen.
                 // “to record your research and thoughts on”
-                // check if scene2 gameobject is inactive
-                // if inactive, set scene2Done to true
-                // if(GameObject.Find("scene2").activeSelf == false){
-                //     scene2Done = true;
-                // }
                 string scene2Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene2Done")).value;
                 if(scene2Done == "true"){
                     // find scene3 gameobject and set it to active
@@ -223,18 +219,41 @@ public class FlagManager : MonoBehaviour
                 Debug.Log("scene 16");
                 string mutant = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("mutant")).value;
                 string disposalKey = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("disposalKey")).value;
-                string brokenClaw = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("brokenClaw")).value;
-                string unknownSample = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("unknownSample")).value;
-                string bloodyReport = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("bloodyReport")).value;
-                if(mutant == "true" && disposalKey == "true" && 
-                brokenClaw == "true" && unknownSample == "true" && bloodyReport == "true")
+                if(mutant == "true" && disposalKey == "true")
                 {
                     scene_index = 17;
+                    scene17Wall.SetActive(false); // player can go to jail cells now
                 }
                 break;
             case 17:
                 Debug.Log("scene 17");
+                // jail cells
+                string brokenClaw = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("brokenClaw")).value;
+                string unknownSample = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("unknownSample")).value;
+                string bloodyReport = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("bloodyReport")).value;
                 // scene 17
+                if(brokenClaw == "true" && unknownSample == "true" && bloodyReport == "true")
+                {
+                    scene_index = 18;
+                    sceneflag18.SetActive(true);
+                    scene18Wall.SetActive(false); // player can go to the final room now
+                }
+                break;
+            case 18:
+                Debug.Log("scene 18");
+                string monster_interacted = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("monster_interacted")).value;
+                string containemnt_computer = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("containment_computer")).value;
+
+                if(monster_interacted == "true" && containemnt_computer == "true")
+                {
+                    scene_index = 19;
+                    sceneflag19.SetActive(true);
+                }
+                // going to containment room
+                break;
+            case 19:
+                Debug.Log("scene 19");
+                
                 break;
             
         }
