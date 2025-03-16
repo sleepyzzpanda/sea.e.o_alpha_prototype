@@ -3,3 +3,4 @@ Huh, never seen this room. Alright, INTRAs offline here. It’s going to catch o
 Let’s make it quick. #speaker:Endo #audio:endo #portrait:endo_default
 ~objective = "Enter the vent"
 ~scene14Done = "true"
+~objective = "Investigate the vent"

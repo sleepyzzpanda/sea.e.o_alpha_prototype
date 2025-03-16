@@ -8,3 +8,4 @@ I left your boxes outside, wasn’t sure where you wanted them. #speaker:Arlo #a
 === final ===
 Well, that concludes the 2nd floor tour. Let’s head back down so INTRA can explain the rest. #speaker:Arlo #audio:arlo #portrait:arlo_default
 -> END
+~objective = "Return to the 1st floor"

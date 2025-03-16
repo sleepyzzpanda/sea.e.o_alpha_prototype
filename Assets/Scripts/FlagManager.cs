@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class FlagManager : MonoBehaviour
 {
     private int scene_index;
+    public TextMeshProUGUI objective_text;
     public GameObject suit_trigger, teleportIN_trigger, ocean_monster, 
     vent_trigger, SF2_trigger, scene17Wall, scene18Wall;
     public GameObject player, sceneflag3, sceneflag4, sceneflag5, 
@@ -82,17 +85,15 @@ public class FlagManager : MonoBehaviour
                     ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene5Done")).value = "true";
                 }
                 if(area_done == "true"){
+                    // set objective text in ink file
+                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("objective")).value = "Return to 1st floor";
                     sceneflag6.SetActive(true);
                     scene_index = 6;
                 }
                 break;
-            case 6: 
-                // print for testing
+            case 6:
                 // cutscene:
                 // go back to first floor
-                // INTRA takes over tour regarding science research
-                // player can thank or ignore EMP, who heads for repair room/electrical 
-                // (tells players to find him there if needed)
                 string scene6Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene6Done")).value;
                 if(scene6Done == "true"){
                     sceneflag7.SetActive(true);
@@ -147,6 +148,8 @@ public class FlagManager : MonoBehaviour
                 Debug.Log("scene 10");
                 string containment_suit = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("containment_suit")).value;
                 if(containment_suit == "true"){
+                    // objective text
+                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("objective")).value = "Head to 1st floor Moon Pool";
                     sceneflag11.SetActive(true);
                     scene_index = 11;
                 }
@@ -173,6 +176,8 @@ public class FlagManager : MonoBehaviour
                 }
                 string scene12Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene12Done")).value;
                 if(scene12Done == "true"){
+                    // objective text
+                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("objective")).value = "Find Arlo in Electrical Room";
                     scene_index = 13;
                     sceneflag13.SetActive(true);
                     ocean_monster.SetActive(false);
@@ -193,6 +198,8 @@ public class FlagManager : MonoBehaviour
                 Debug.Log("scene 14");
                 string scene14Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene14Done")).value;
                 if(scene14Done == "true"){
+                    // objective text
+                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("objective")).value = "Explore the mysterious floor";
                     scene_index = 15;
                 }
                 break;
@@ -210,6 +217,8 @@ public class FlagManager : MonoBehaviour
                 lab1card == "true" && lab2log == "true" && lab3ingredientList == "true" && 
                 harpoon == "true" && weaponsKey == "true")
                 {
+                    // objective
+                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("objective")).value = "Head lower down...";
                     scene_index = 16;
                     SF2_trigger.SetActive(true);
                 }
@@ -262,5 +271,6 @@ public class FlagManager : MonoBehaviour
             Debug.Log("game over");
             scene_index = -1;
         }
+        objective_text.text = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("objective")).value;
     }
 }

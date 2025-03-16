@@ -9,3 +9,4 @@ Why would I tell you? I don’t like you much. #speaker:Arlo #audio:arlo #portra
 The vent in the marine room leads nowhere...let’s start there.  #speaker:Endo #audio:endo #portrait:endo_superior
 Fine, I’ll help. I don’t want to be stuck here with you for eternity. #speaker:Arlo #audio:arlo #portrait:arlo_annoyed
 ~scene13Done = "true"
+~objective = "Head to Marine Room"

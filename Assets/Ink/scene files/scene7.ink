@@ -6,3 +6,4 @@ Indeed! This station houses top-secret research but has served it’s purpose, a
 Your proven loyalty to the company meant you were hired! Please review the research and upload to me what is useful.
 There are also samples that need to be delivered to the surface. You must choose what those are.
 ~scene7Done = "true"
+~objective = "Explore all rooms on 1st floor"

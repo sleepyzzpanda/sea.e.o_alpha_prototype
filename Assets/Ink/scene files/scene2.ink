@@ -6,3 +6,4 @@ Uh huh, I’m Endo. Where’s everyone else? You’re obviously not who I report
 ...Oh, it’s just us. Plus the AI. Anyways, I’m supposed to give you this, for you to record your findings on once you’re setup.  #speaker:Arlo #audio:arlo #portrait:arlo_uneasy2
 [press c at anytime to open menu] #speaker: #portrait:default
 ~scene2Done = "true"
+~objective = "Head upwards to the 2nd floor"

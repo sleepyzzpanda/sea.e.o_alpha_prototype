@@ -5,3 +5,4 @@ We’ll start with where you’ll be staying! Let’s go to the 2nd floor. #spea
 [press “z” to interact with objects] #speaker: #portrait:default
 [take elevator to 2nd floor living]
 ~scene3Done = "true"
+~objective = "Head upwards to the 2nd floor"
