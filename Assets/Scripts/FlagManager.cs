@@ -6,6 +6,9 @@ using TMPro;
 
 public class FlagManager : MonoBehaviour
 {
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip bgm, gameover;
     [Header("Ink JSON")]
     [SerializeField] private TextAsset introscene, goodending, badending, traitorending;
     [Header("Screen UI Objects")]
@@ -38,11 +41,17 @@ public class FlagManager : MonoBehaviour
     {
         switch(scene_index){
             case 0:
+                // play bgm
+                if(!audioSource.isPlaying){
+                    audioSource.clip = bgm;
+                    audioSource.Play();
+                }
                 // start screen
                 if(Input.GetKeyDown(KeyCode.X)){
                     StartScreen.SetActive(false);
                     cutscene_screen.SetActive(true);
                     scene_index = 1;
+
                 }
                 break;
             case 1: // exposition
@@ -309,6 +318,7 @@ public class FlagManager : MonoBehaviour
                 // set monster to chase player
                 // set security door trigger to active
                 containment_monster.GetComponent<follower_behavior>().enabled = true;
+                containment_monster.GetComponent<AudioSource>().Play();
                 containment_monster.GetComponent<SceneTrigger>().enabled = true;
                 security_door_trigger.SetActive(true);
                 string security_door_open = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("security_door")).value;
@@ -346,7 +356,6 @@ public class FlagManager : MonoBehaviour
 
         if(gamover == "true" && !ending_played){
             ending_played = true;
-            
             cutscene_screen.SetActive(true);
             Debug.Log("game over");
             if(traitor_ending == "true"){
@@ -362,6 +371,9 @@ public class FlagManager : MonoBehaviour
         } else if(gamover == "true" && ending_played){
             gameover_screen.SetActive(true);
             objective_screen.SetActive(false);
+            // change to gameover audio
+            audioSource.clip = gameover;
+            audioSource.Play();
         }        
     }
 }

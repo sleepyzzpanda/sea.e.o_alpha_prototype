@@ -12,6 +12,9 @@ public class elevator : MonoBehaviour
     public GameObject player;
     public Transform floor1pos, floor1cam, floor2pos, floor2cam;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+
     private bool playerInRange;
 
     private void Awake()
@@ -29,6 +32,8 @@ public class elevator : MonoBehaviour
             
             if(InputManager.GetInstance().GetInteractPressed())
             {
+                // play audio
+                audioSource.PlayOneShot(audioClip);
                 DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
                 int floor = ((Ink.Runtime.IntValue) DialogueManager.GetInstance().GetVariableState("current_floor")).value;
                 if(floor == 2){ // go to floor 1

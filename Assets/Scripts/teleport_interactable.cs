@@ -37,9 +37,9 @@ public class teleport_interactable : MonoBehaviour
                 audioSource.PlayOneShot(audioClip);
                 player.GetComponent<player_behavior>().is_diving = diving;
                 if(diving){
-                    player_sprite.GetComponent<SpriteRenderer>().sprite = player.GetComponent<player_behavior>().sprite_diving_front;
+                    player_sprite.GetComponent<SpriteRenderer>().sprite = player.GetComponent<player_behavior>().diving_front[0];
                 } else {
-                    player_sprite.GetComponent<SpriteRenderer>().sprite = player.GetComponent<player_behavior>().sprite_normal_front;
+                    player_sprite.GetComponent<SpriteRenderer>().sprite = player.GetComponent<player_behavior>().normal_front[0];
                 }
                 DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
                 player.transform.position = new_pos.position;

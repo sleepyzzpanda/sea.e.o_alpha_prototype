@@ -10,10 +10,17 @@ public class player_behavior : MonoBehaviour
     public float speed = 5.0f;
     public Transform move_point;
     public LayerMask stop_movement, BOX;
-    public Sprite sprite_normal_front, sprite_normal_back, sprite_normal_left, sprite_normal_right;
-    public Sprite sprite_diving_front, sprite_diving_back, sprite_diving_left, sprite_diving_right;
+    public Sprite[] normal_front, normal_back, normal_left, normal_right;
+    public Sprite[] diving_front, diving_back, diving_left, diving_right;
+    
     public GameObject _sprite;
     public bool is_diving;
+    private int counter = 0;
+    private float timeAccumulator = 0f;
+    private float frameRate = 1f / 6f; // 1/60th of a second (60 FPS)
+
+    public AudioSource audioSource;
+    public AudioClip audioClip;
     // ---------------------------------------------
     // Start is called before the first frame update
     void Start()
@@ -25,6 +32,22 @@ public class player_behavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // increment counter when player moves
+        if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0){
+            timeAccumulator += Time.deltaTime;
+            while (timeAccumulator >= frameRate)
+            {
+                counter++;
+                timeAccumulator -= frameRate;
+                // if audio not playing
+                if(!audioSource.isPlaying){
+                    audioSource.PlayOneShot(audioClip);
+                }
+            }
+            if(counter >= 7){
+                counter = 0;
+            }
+        }
         //prevent movement if dialoague is playing
         if(DialogueManager.GetInstance().dialogueIsPlaying)
         {
@@ -49,15 +72,15 @@ public class player_behavior : MonoBehaviour
                 move_point.position += new Vector3(Input.GetAxisRaw("Horizontal") * 0.64f, 0f, 0f);
                 if(is_diving){
                     if(Input.GetAxisRaw("Horizontal") == 1f){
-                        _sprite.GetComponent<SpriteRenderer>().sprite = sprite_diving_right;
+                        _sprite.GetComponent<SpriteRenderer>().sprite = diving_right[counter];
                     } else if(Input.GetAxisRaw("Horizontal") == -1f){
-                        _sprite.GetComponent<SpriteRenderer>().sprite = sprite_diving_left;
+                        _sprite.GetComponent<SpriteRenderer>().sprite = diving_left[counter];
                     }
                 } else {
                     if(Input.GetAxisRaw("Horizontal") == 1f){
-                        _sprite.GetComponent<SpriteRenderer>().sprite = sprite_normal_right;
+                        _sprite.GetComponent<SpriteRenderer>().sprite = normal_right[counter];
                     } else if(Input.GetAxisRaw("Horizontal") == -1f){
-                        _sprite.GetComponent<SpriteRenderer>().sprite = sprite_normal_left;
+                        _sprite.GetComponent<SpriteRenderer>().sprite = normal_left[counter];
                     }
                 }
             }
@@ -66,15 +89,15 @@ public class player_behavior : MonoBehaviour
                 move_point.position += new Vector3(0f, Input.GetAxisRaw("Vertical") * 0.64f, 0f);
                 if(is_diving){
                     if(Input.GetAxisRaw("Vertical") == 1f){
-                        _sprite.GetComponent<SpriteRenderer>().sprite = sprite_diving_back;
+                        _sprite.GetComponent<SpriteRenderer>().sprite = diving_back[counter];
                     } else if(Input.GetAxisRaw("Vertical") == -1f){
-                        _sprite.GetComponent<SpriteRenderer>().sprite = sprite_diving_front;
+                        _sprite.GetComponent<SpriteRenderer>().sprite = diving_front[counter];
                     }
                 } else {
                     if(Input.GetAxisRaw("Vertical") == 1f){
-                        _sprite.GetComponent<SpriteRenderer>().sprite = sprite_normal_back;
+                        _sprite.GetComponent<SpriteRenderer>().sprite = normal_back[counter];
                     } else if(Input.GetAxisRaw("Vertical") == -1f){
-                        _sprite.GetComponent<SpriteRenderer>().sprite = sprite_normal_front;
+                        _sprite.GetComponent<SpriteRenderer>().sprite = normal_front[counter];
                     }
                 }
             }

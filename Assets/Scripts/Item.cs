@@ -16,6 +16,8 @@ public class Item : MonoBehaviour
     private bool playerInRange;
     private InventoryManager inventoryManager;
     public GameObject container;
+    public AudioSource audioSource;
+    public AudioClip audioClip;
 
     private void Awake()
     {
@@ -36,6 +38,8 @@ public class Item : MonoBehaviour
             {
                 DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
                 inventoryManager.AddItem(itemName, quantity, itemSprite);
+                
+                audioSource.PlayOneShot(audioClip);
                 // set item to inactive
                 container.SetActive(false);
             }
