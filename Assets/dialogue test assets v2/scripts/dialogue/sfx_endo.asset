@@ -15,6 +15,6 @@ MonoBehaviour:
   id: endo
   dialogueTypingSoundClip: {fileID: 8300000, guid: 6d31080270e464e4099061648427d0c3, type: 3}
   frequencyLevel: 4
-  minPitch: 0.82
-  maxPitch: 0.92
+  minPitch: 0.73
+  maxPitch: 0.83
   stopAudioSource: 0

@@ -22,6 +22,8 @@ If you stand against me, I will release these monsters to tear you apart. They h
     Kill the monster, Employee 357! #speaker:Intra #audio:intra #portrait:intra_default
     [you kill the monster with the harpoon gun from earlier] #speaker:none #portrait:default
     ~traitor = "true"
+    ~gameover = "true"
+    ~scene19Done = "true"
 
  + [go against INTRA]
 Then I’m against you. Arlo you with me? #speaker:Endo #audio:endo #portrait:endo_mad2 
@@ -33,3 +35,4 @@ We can cure them! I have Esther’s formula and the chemicals! #speaker:Endo #au
 Back up to the labs! #speaker:Arlo #audio:arlo #portrait:arlo_mad
 ~traitor = "false"
 ~objective = "get back to the main lab"
+~scene19Done = "true"

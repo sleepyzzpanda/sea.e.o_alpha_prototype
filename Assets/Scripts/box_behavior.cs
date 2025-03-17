@@ -44,24 +44,24 @@ public class box_behavior : MonoBehaviour
     void box_move(string direction){
         // move move_point to the direction
         if(direction == "right"){
-            if(!Physics2D.OverlapCircle(move_point.position + new Vector3(0.5f, 0f, 0f), 0.1f, stop_movement))
+            if(!Physics2D.OverlapCircle(move_point.position + new Vector3(0.64f, 0f, 0f), 0.1f, stop_movement))
             {
-                move_point.position += new Vector3(0.5f, 0f, 0f);
+                move_point.position += new Vector3(0.64f, 0f, 0f);
             }
         } else if(direction == "left"){
-            if(!Physics2D.OverlapCircle(move_point.position + new Vector3(-0.5f, 0f, 0f), 0.1f, stop_movement))
+            if(!Physics2D.OverlapCircle(move_point.position + new Vector3(-0.64f, 0f, 0f), 0.1f, stop_movement))
             {
-                move_point.position += new Vector3(-0.5f, 0f, 0f);
+                move_point.position += new Vector3(-0.64f, 0f, 0f);
             }
         } else if(direction == "down"){
-            if(!Physics2D.OverlapCircle(move_point.position + new Vector3(0f, -0.5f, 0f), 0.1f, stop_movement))
+            if(!Physics2D.OverlapCircle(move_point.position + new Vector3(0f, -0.64f, 0f), 0.1f, stop_movement))
             {
-                move_point.position += new Vector3(0f, -0.5f, 0f);
+                move_point.position += new Vector3(0f, -0.64f, 0f);
             }
         } else if(direction == "up"){
-            if(!Physics2D.OverlapCircle(move_point.position + new Vector3(0f, 1.0f, 0f), 0.1f, stop_movement))
+            if(!Physics2D.OverlapCircle(move_point.position + new Vector3(0f, 0.64f, 0f), 0.1f, stop_movement))
             {
-                move_point.position += new Vector3(0f, 1.0f, 0f);
+                move_point.position += new Vector3(0f, 0.64f, 0f);
             }
         }
     }

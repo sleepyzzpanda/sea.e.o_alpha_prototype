@@ -2,6 +2,8 @@ VAR current_floor = 1
 VAR gameover = "false"
 VAR objective = "none"
 VAR traitor = "false"
+VAR ending = "none"
+VAR intro = "false"
 // scene 5
 VAR dining_hall = "false"
 VAR observation_deck = "false"
@@ -20,6 +22,7 @@ VAR electrical_data = "false"
 VAR screwdriver = "false"
 VAR flashlight = "false"
 VAR s8objsDone = "false"
+VAR USB = "false"
 
 //scene10
 VAR containment_suit = "false"
@@ -49,6 +52,7 @@ VAR bloodyReport = "false"
 // scene 18
 VAR monster_interacted = "false"
 VAR containment_computer = "false" 
+VAR security_door = "false"
 
 // scene flags
 VAR scene2Done = "false"
@@ -61,3 +65,6 @@ VAR scene9Done = "false"
 VAR scene12Done = "false"
 VAR scene13Done = "false"
 VAR scene14Done = "false"
+VAR scene19Done = "false"
+VAR scene20Done = "false"
+VAR scene21Done = "false"

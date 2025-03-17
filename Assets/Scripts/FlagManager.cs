@@ -6,18 +6,31 @@ using TMPro;
 
 public class FlagManager : MonoBehaviour
 {
+    [Header("Ink JSON")]
+    [SerializeField] private TextAsset introscene, goodending, badending, traitorending;
+    [Header("Screen UI Objects")]
+    public GameObject StartScreen, cutscene_screen, gameover_screen, objective_screen;
     private int scene_index;
+    private bool ending_played;
     public TextMeshProUGUI objective_text;
     public GameObject suit_trigger, teleportIN_trigger, ocean_monster, 
-    vent_trigger, SF2_trigger, scene17Wall, scene18Wall;
-    public GameObject player, sceneflag3, sceneflag4, sceneflag5, 
+    vent_trigger, SF2_trigger, scene17Wall, scene18Wall, containment_monster, 
+    security_door_trigger, security_door;
+    public GameObject player, sceneflag2, sceneflag3, sceneflag4, sceneflag5, 
     sceneflag6, sceneflag7, sceneflag8, sceneflag9, sceneflag11,
-    sceneflag12, sceneflag13, sceneflag14, sceneflag18, sceneflag19;
+    sceneflag12, sceneflag13, sceneflag14, sceneflag18, sceneflag19,
+    sceneflag21, sceneflag22;
     // Start is called before the first frame update
     void Start()
     {
-        scene_index = 2; // inits to 0 
+        scene_index = 0; // inits to 0 
         suit_trigger.SetActive(false);
+        containment_monster.GetComponent<follower_behavior>().enabled = false;
+        containment_monster.GetComponent<SceneTrigger>().enabled = false;
+        StartScreen.SetActive(true);
+        objective_screen.SetActive(false);
+        ending_played = false;
+        player.SetActive(false);
     }
 
     // Update is called once per frame
@@ -26,9 +39,28 @@ public class FlagManager : MonoBehaviour
         switch(scene_index){
             case 0:
                 // start screen
+                if(Input.GetKeyDown(KeyCode.X)){
+                    StartScreen.SetActive(false);
+                    cutscene_screen.SetActive(true);
+                    scene_index = 1;
+                }
                 break;
             case 1: // exposition
                 /*MC leaves underwater vehicle, goes up ladder to entrance on first floor (labs)*/
+                // play introscene
+                string intro = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("intro")).value;
+                if(intro == "true"){
+                    // find scene2 gameobject and set it to active
+                    sceneflag2.SetActive(true);
+                    scene_index = 2;
+                    objective_screen.SetActive(true);
+                    cutscene_screen.SetActive(false);
+                    player.SetActive(true);
+                } else {
+                    if(!DialogueManager.GetInstance().dialogueIsPlaying){
+                        DialogueManager.GetInstance().EnterDialogueMode(introscene);
+                    }
+                }
                 break;
             case 2: 
                 // EMP greets mc:
@@ -43,12 +75,6 @@ public class FlagManager : MonoBehaviour
                 }
                 break;
             case 3: 
-                // tutorial
-                // when player opens menu item ==> intra will show up on screen and introduce itself
-                // talks abt menu options
-                // tutorial and welcome from company
-                // asks EMP to give mc a tour
-
                 string scene3Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene3Done")).value;
                 if(scene3Done == "true"){
                     // find scene4 gameobject and set it to active
@@ -58,10 +84,6 @@ public class FlagManager : MonoBehaviour
                 break;
             case 4:
                 // tour
-                //as theyre walking around, EMP or intra can explain whats going on (brief)
-                // “we’ll start with where you’ll be staying”
-                // players asks what EMP does
-
                 string scene4Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene4Done")).value;
                 if(scene4Done == "true"){
                     sceneflag5.SetActive(true);
@@ -177,7 +199,7 @@ public class FlagManager : MonoBehaviour
                 string scene12Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene12Done")).value;
                 if(scene12Done == "true"){
                     // objective text
-                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("objective")).value = "Find Arlo in Electrical Room";
+                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("objective")).value = "Investigate Bedroom Panel + Find Arlo in Electrical Room";
                     scene_index = 13;
                     sceneflag13.SetActive(true);
                     ocean_monster.SetActive(false);
@@ -255,6 +277,8 @@ public class FlagManager : MonoBehaviour
 
                 if(monster_interacted == "true" && containemnt_computer == "true")
                 {
+                    //objective
+                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("objective")).value = "Go to containment room";
                     scene_index = 19;
                     sceneflag19.SetActive(true);
                 }
@@ -262,15 +286,71 @@ public class FlagManager : MonoBehaviour
                 break;
             case 19:
                 Debug.Log("scene 19");
-                
+                string scene19Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene19Done")).value;
+                string traitor = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("traitor")).value;
+                if(scene19Done == "true" && traitor == "false"){
+                    scene_index = 20;
+                }
+                break;
+            case 20:
+                Debug.Log("scene 20");
+                // not traitor ending, run from monster
+                // set monster to chase player
+                // set security door trigger to active
+                containment_monster.GetComponent<follower_behavior>().enabled = true;
+                containment_monster.GetComponent<SceneTrigger>().enabled = true;
+                security_door_trigger.SetActive(true);
+                string security_door_open = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("security_door")).value;
+                if(security_door_open == "true"){
+                    // turn off monster movement
+                    containment_monster.GetComponent<follower_behavior>().enabled = false;
+                    //set monster position
+                    containment_monster.transform.position = new Vector3(99.24f, -1.2f, -1.0f);
+                    security_door.SetActive(true);
+                }
+                string scene20Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene20Done")).value;
+                if(scene20Done == "true"){
+                    scene_index = 21;
+                    sceneflag21.SetActive(true);
+                }
+                break;
+            case 21:
+                // return to main lab
+                Debug.Log("scene 21");
+                string scene21Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene21Done")).value;
+                if(scene21Done == "true"){
+                    scene_index = 22;
+                    sceneflag22.SetActive(true);
+                }
+                break;
+            case 22: // AI room, final act
+                Debug.Log("scene 22");
                 break;
             
         }
         string gamover = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("gameover")).value;
-        if(gamover == "true"){
-            Debug.Log("game over");
-            scene_index = -1;
-        }
+        string traitor_ending = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("traitor")).value;
+        string ending = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("ending")).value;
         objective_text.text = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("objective")).value;
+
+        if(gamover == "true" && !ending_played){
+            ending_played = true;
+            
+            cutscene_screen.SetActive(true);
+            Debug.Log("game over");
+            if(traitor_ending == "true"){
+                DialogueManager.GetInstance().EnterDialogueMode(traitorending);
+            } else {
+                if(ending == "good"){
+                    DialogueManager.GetInstance().EnterDialogueMode(goodending);
+                } else {
+                    DialogueManager.GetInstance().EnterDialogueMode(badending);
+                }
+            }
+            scene_index = -1;
+        } else if(gamover == "true" && ending_played){
+            gameover_screen.SetActive(true);
+            objective_screen.SetActive(false);
+        }        
     }
 }

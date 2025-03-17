@@ -1,4 +1,6 @@
 INCLUDE globals.ink
+{containment_computer == "false": -> main | -> END}
+=== main ===
 Wait, this shape looks like the hidden USB I found! #speaker:Endo #audio:endo #portrait:endo_judging
 [plug in USB, interact with computer]
 This is Employee 22, and if you’re watching this it means I failed. #speaker:Esther #audio:esther #portrait:esther_default
@@ -10,3 +12,4 @@ SEA.E.O is coming to destroy their evidence, I don’t know if I’ll survive.
 Wait, what is that? #speaker:Esther #audio:esther #portrait:esther_surprised
 The vents, no! #speaker:Esther #audio:esther #portrait:esther_scared
 ~containment_computer = "true"
+-> END

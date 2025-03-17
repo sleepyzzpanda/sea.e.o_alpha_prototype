@@ -6,17 +6,19 @@ public class SceneTrigger : MonoBehaviour
 {
     [Header("Ink JSON")]
     [SerializeField] private TextAsset inkJSON;
-    private bool playerInRange;
+    private bool playerInRange, has_triggered;
     private void Awake()
     {
         playerInRange = false;
+        has_triggered = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
+        if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying && !has_triggered)
         {
+            has_triggered = true;
             // trigger dialogue if player is in range and dialogue is not playing
             DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
             // set this object to inactive after dialogue is triggered
