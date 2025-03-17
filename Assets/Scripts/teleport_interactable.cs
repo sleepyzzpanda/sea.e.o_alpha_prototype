@@ -15,6 +15,8 @@ public class teleport_interactable : MonoBehaviour
     public bool diving;
 
     private bool playerInRange;
+    public AudioSource audioSource;
+    public AudioClip audioClip;
 
     private void Awake()
     {
@@ -32,6 +34,7 @@ public class teleport_interactable : MonoBehaviour
             
             if(InputManager.GetInstance().GetInteractPressed())
             {
+                audioSource.PlayOneShot(audioClip);
                 player.GetComponent<player_behavior>().is_diving = diving;
                 if(diving){
                     player_sprite.GetComponent<SpriteRenderer>().sprite = player.GetComponent<player_behavior>().sprite_diving_front;

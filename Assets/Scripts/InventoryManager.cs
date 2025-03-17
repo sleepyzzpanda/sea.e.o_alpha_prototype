@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public GameObject InventoryMenu;
+    public GameObject InventoryMenu, ControlScreen;
     private bool menuActivated;
     public ItemSlot[] itemSlots;
     // Start is called before the first frame update
@@ -16,8 +16,8 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if key "C" is pressed, show inventory menu
-        if(Input.GetKeyDown(KeyCode.C)){
+        // if key "V" is pressed, show inventory menu
+        if(Input.GetKeyDown(KeyCode.V)){
             if(menuActivated == false){
                 InventoryMenu.SetActive(true);
                 menuActivated = true;
@@ -25,6 +25,18 @@ public class InventoryManager : MonoBehaviour
                 Time.timeScale = 0;
             } else{
                 InventoryMenu.SetActive(false);
+                menuActivated = false;
+                // resume the game
+                Time.timeScale = 1;
+            }
+        } else if(Input.GetKeyDown(KeyCode.C)){
+            if(menuActivated == false){
+                ControlScreen.SetActive(true);
+                menuActivated = true;
+                // pause the game
+                Time.timeScale = 0;
+            } else{
+                ControlScreen.SetActive(false);
                 menuActivated = false;
                 // resume the game
                 Time.timeScale = 1;
