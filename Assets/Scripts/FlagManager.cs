@@ -15,7 +15,7 @@ public class FlagManager : MonoBehaviour
     public TextMeshProUGUI objective_text;
     public GameObject suit_trigger, teleportIN_trigger, ocean_monster, 
     vent_trigger, SF2_trigger, scene17Wall, scene18Wall, containment_monster, 
-    security_door_trigger, security_door;
+    security_door_trigger, security_door, ocean_wall;
     public GameObject player, sceneflag2, sceneflag3, sceneflag4, sceneflag5, 
     sceneflag6, sceneflag7, sceneflag8, sceneflag9, sceneflag11,
     sceneflag12, sceneflag13, sceneflag14, sceneflag18, sceneflag19,
@@ -182,6 +182,10 @@ public class FlagManager : MonoBehaviour
                 // needs to do puzzle to confirm drone movement, drone leaves
 
                 Debug.Log("scene 11");
+                string ocean_key = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("ocean_key")).value;
+                if(ocean_key == "true"){
+                    ocean_wall.SetActive(false);
+                }   
                 string s11_puzzle = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("s11_puzzle")).value;
                 if(s11_puzzle == "true"){
                     sceneflag12.SetActive(true);
@@ -210,7 +214,14 @@ public class FlagManager : MonoBehaviour
                 Debug.Log("scene 13");
                 // find and talk to Arlo
                 string scene13Done = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("scene13Done")).value;
-                if(scene13Done == "true"){
+                string usb = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("USB")).value;
+                if(usb == "true" && scene13Done == "false"){
+                    // objective text
+                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("objective")).value = "Find Arlo in Electrical Room";
+                } else if(usb == "false" && scene13Done == "true"){
+                    // objective text
+                    ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("objective")).value = "Investigate Bedroom Panel";
+                } else if(scene13Done == "true" && usb == "true"){
                     vent_trigger.SetActive(true);
                     sceneflag14.SetActive(true);
                     scene_index = 14;

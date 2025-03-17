@@ -10,12 +10,15 @@ public class teleport_interactable : MonoBehaviour
     [Header("Ink JSON")]
     [SerializeField] private TextAsset inkJSON;
     public GameObject player;
+    private GameObject player_sprite;
     public Transform new_pos, new_cam;
+    public bool diving;
 
     private bool playerInRange;
 
     private void Awake()
     {
+        player_sprite = player.GetComponent<player_behavior>()._sprite;
         playerInRange = false;
         visualCue.SetActive(false);
     }
@@ -29,6 +32,12 @@ public class teleport_interactable : MonoBehaviour
             
             if(InputManager.GetInstance().GetInteractPressed())
             {
+                player.GetComponent<player_behavior>().is_diving = diving;
+                if(diving){
+                    player_sprite.GetComponent<SpriteRenderer>().sprite = player.GetComponent<player_behavior>().sprite_diving_front;
+                } else {
+                    player_sprite.GetComponent<SpriteRenderer>().sprite = player.GetComponent<player_behavior>().sprite_normal_front;
+                }
                 DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
                 player.transform.position = new_pos.position;
                 player.GetComponent<player_behavior>().move_point.position = new_pos.position;

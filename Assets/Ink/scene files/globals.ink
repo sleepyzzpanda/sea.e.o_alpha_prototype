@@ -24,11 +24,13 @@ VAR flashlight = "false"
 VAR s8objsDone = "false"
 VAR USB = "false"
 
+
 //scene10
 VAR containment_suit = "false"
 
 // scene 11
 VAR s11_puzzle = "false"
+VAR ocean_key = "false"
 
 // scene 12
 VAR monster_chase = "false"
